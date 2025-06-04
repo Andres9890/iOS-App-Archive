@@ -86,7 +86,7 @@
                     <div class="app-screenshot">
                         <div class="iphone-frame">
                             <div class="screen-content">
-                                <img src="${app.screenshot}" alt="${app.title} Screenshot">
+                                <img src="${app.screenshot}" alt="${app.title} Screenshot" loading="lazy">
                             </div>
                         </div>
                     </div>
@@ -94,7 +94,7 @@
                 
                 card.innerHTML = `
                     <div class="app-icon">
-                        <img src="${app.icon}" alt="${app.title} Icon" onerror="this.src='https://via.placeholder.com/100/007aff/ffffff?text=App'">
+                        <img src="${app.icon}" alt="${app.title} Icon" onerror="this.src='https://via.placeholder.com/100/007aff/ffffff?text=App'" loading="lazy">
                     </div>
                     <h3 class="app-title">${app.title}</h3>
                     <p class="app-developer">${app.developer}</p>
@@ -134,7 +134,7 @@
                         <button class="close-modal">&times;</button>
                         <div class="modal-header">
                             <div class="modal-icon">
-                                <img src="${app.icon}" alt="${app.title} Icon" onerror="this.src='https://via.placeholder.com/100/007aff/ffffff?text=App'">
+                                <img src="${app.icon}" alt="${app.title} Icon" onerror="this.src='https://via.placeholder.com/100/007aff/ffffff?text=App'" loading="lazy">
                             </div>
                             <div>
                                 <h2 class="modal-title">${app.title}</h2>
