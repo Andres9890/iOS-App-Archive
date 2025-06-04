@@ -21,12 +21,12 @@
                 description: "The wobbly, bouncy, jelly-licious driving game is back!\nDrive through squishy worlds with new vehicles and obstacles.\nUnique jelly physics make every drive different.\nColorful, imaginative levels to explore.\nSimple controls with challenging gameplay.\nPerfect for quick gaming sessions.",
                 versions: {
                     archived: ["1.0", "1.0.1"],
-                    unarchived: [],
-                    downloadUrl: "https://archive.org/download/com.disney.jellycar3lite-ios3.1.3-clutch-2.0.4/"
+                    unarchived: []
                 },
                 compatibility: "iPhoneOS 3.1.3 and Later",
                 icon: "app-icon/jelly-car-3-lite/jelly-car-3-lite.png",
-                screenshot: "UNDERCONSTRUCTION.jpg"
+                screenshot: "UNDERCONSTRUCTION.jpg",
+                downloadUrl: "https://archive.org/download/com.disney.jellycar3lite-ios3.1.3-clutch-2.0.4/"
             },
             {
                 id: "disney-gift-card",
@@ -35,12 +35,12 @@
                 description: "Check your Disney Gift Card balance anytime.\nSecure and easy to use.\nManage multiple gift cards in one place.\nView transaction history.\nRedeem new gift cards with your camera.\nOfficial Disney app with trusted security.",
                 versions: {
                     archived: ["1.0"],
-                    unarchived: [],
-                    downloadUrl: "https://archive.org/download/com.disney.disneygiftcard-ios3.1.2-clutch-2.0.4/"
+                    unarchived: []
                 },
                 compatibility: "iPhoneOS 3.1.2 and Later",
                 icon: "app-icon/disney-gift-card/disney-gift-card.png",
                 screenshot: "UNDERCONSTRUCTION.jpg",
+                downloadUrl: "https://archive.org/download/com.disney.disneygiftcard-ios3.1.2-clutch-2.0.4/"
             },
             {
                 id: "jelly-car-2",
@@ -50,11 +50,11 @@
                 versions: {
                     archived: ["1.0", "1.0.1", "1.1", "1.2", "1.2.1", "1.2.2"],
                     unarchived: [],
-                    downloadUrl: "https://archive.org/download/jelly-car-2-1.2.2"
                 },
                 compatibility: "iPhoneOS 4.0 and Later",
                 icon: "app-icon/jelly-car-2/jelly-car-2.jpeg", 
-                screenshot: "UNDERCONSTRUCTION.jpg"
+                screenshot: "UNDERCONSTRUCTION.jpg",
+                downloadUrl: "https://archive.org/download/jelly-car-2-1.2.2"
             },
             {
                 id: "flappy-bird",
@@ -63,12 +63,12 @@
                 description: "The infamous challenging flying game!\nTap to keep the bird flying through pipes.\nSimple controls, extremely difficult to master.\nCompete with friends for high scores.\nMinimalist pixel art style.\nAddictive one-more-try gameplay.",
                 versions: {
                     archived: ["1.0", "1.1", "1.2", "1.3"],
-                    unarchived: [],
-                    downloadUrl: "https://archive.org/download/flappy-bird-v-1.3_202412"
+                    unarchived: []
                 },
                 compatibility: "iOS 6.0 and Later",
                 icon: "app-icon/flappy-bird/flappy-bird.png",
-                screenshot: "UNDERCONSTRUCTION.jpg"
+                screenshot: "UNDERCONSTRUCTION.jpg",
+                downloadUrl: "https://archive.org/download/flappy-bird-v-1.3_202412"
             }
         ];
 
