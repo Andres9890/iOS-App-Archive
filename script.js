@@ -73,6 +73,16 @@
             const appsContainer = document.getElementById('appsContainer');
             const modalContainer = document.getElementById('modalContainer');
             
+            let notFoundMessage = document.getElementById('notFoundMessage');
+            if (!notFoundMessage) {
+                notFoundMessage = document.createElement('div');
+                notFoundMessage.id = 'notFoundMessage';
+                notFoundMessage.className = 'not-found-message';
+                notFoundMessage.textContent = 'No apps found.';
+                notFoundMessage.style.display = 'none';
+                appsContainer.parentNode.insertBefore(notFoundMessage, appsContainer.nextSibling);
+            }
+            
             appsContainer.innerHTML = '';
             modalContainer.innerHTML = '';
             
@@ -209,6 +219,7 @@
             searchInput.addEventListener('input', function() {
                 const searchTerm = this.value.toLowerCase();
                 const appCards = document.querySelectorAll('.app-card');
+                let anyVisible = false;
                 
                 // Show/hide cancel button based on input
                 if (searchTerm.length > 0) {
@@ -222,10 +233,16 @@
                     const title = card.querySelector('.app-title').textContent.toLowerCase();
                     if (title.includes(searchTerm)) {
                         card.style.display = 'flex';
+                        anyVisible = true;
                     } else {
                         card.style.display = 'none';
                     }
                 });
+                if (!anyVisible) {
+                    notFoundMessage.style.display = 'block';
+                } else {
+                    notFoundMessage.style.display = 'none';
+                }
             });
             
             // Cancel search
@@ -235,6 +252,7 @@
                 document.querySelectorAll('.app-card').forEach(card => {
                     card.style.display = 'flex';
                 });
+                notFoundMessage.style.display = 'none';
                 searchInput.blur();
             });
             
