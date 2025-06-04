@@ -183,6 +183,10 @@
                 
                 // Add click handler
                 card.querySelector(`[data-app-id="${app.id}"]`).addEventListener('click', function() {
+                    const params = new URLSearchParams(window.location.search);
+                    params.set('app', app.id);
+                    const newUrl = window.location.pathname + '?' + params.toString();
+                    window.history.replaceState({}, '', newUrl);
                     document.getElementById(`${app.id}Modal`).classList.add('active');
                     document.body.style.overflow = 'hidden';
                 });
@@ -193,6 +197,10 @@
                 btn.addEventListener('click', function() {
                     this.closest('.modal-overlay').classList.remove('active');
                     document.body.style.overflow = 'auto';
+                    const params = new URLSearchParams(window.location.search);
+                    params.delete('app');
+                    const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+                    window.history.replaceState({}, '', newUrl);
                 });
             });
             
@@ -202,6 +210,10 @@
                     if (e.target === this) {
                         this.classList.remove('active');
                         document.body.style.overflow = 'auto';
+                        const params = new URLSearchParams(window.location.search);
+                        params.delete('app');
+                        const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+                        window.history.replaceState({}, '', newUrl);
                     }
                 });
             });
@@ -283,6 +295,22 @@
                     searchInput.blur();
                 }
             });
+
+            const appParam = urlParams.get('app');
+            if (appParam) {
+                const modal = document.getElementById(`${appParam}Modal`);
+                if (modal) {
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            const queryParam = urlParams.get('query');
+            if (queryParam) {
+                searchInput.value = queryParam;
+                const event = new Event('input', { bubbles: true });
+                searchInput.dispatchEvent(event);
+            }
         }
 
         // Load apps when page is ready
