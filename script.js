@@ -50,7 +50,7 @@
                     unarchived: []
                 },
                 compatibility: "iPhoneOS 4.0 and Later",
-                icon: "app-icon/jelly-car-2/jelly-car-2.png", 
+                icon: "app-icon/jelly-car-2/jelly-car-2.jpeg", 
                 screenshot: "UNDERCONSTRUCTION.jpg"
             },
             {
