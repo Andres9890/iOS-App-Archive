@@ -302,6 +302,13 @@
                 if (modal) {
                     modal.classList.add('active');
                     document.body.style.overflow = 'hidden';
+                } else {
+                    urlParams.delete('app');
+                    const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
+                    window.history.replaceState({}, '', newUrl);
+                    setTimeout(() => {
+                        alert('App ID not found, please try again later.');
+                    }, 100);
                 }
             }
 
