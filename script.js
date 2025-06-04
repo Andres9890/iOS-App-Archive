@@ -10,8 +10,8 @@
                     unarchived: ["1.0.0", "1.1.0", "1.2.0", "1.3.0", "1.3.1", "1.3.2"]
                 },
                 compatibility: "iPhoneOS 4.3 and Later",
-                icon: "app-icon/escape-if-you-can/th-3234825290_thumb.jpg",
-                screenshot: "IMG_6233.jpeg",
+                icon: "app-icon/escape-if-you-can/escape-if-you-can.jpg",
+                screenshot: "UNDERCONSTRUCTION.jpg",
                 downloadUrl: "https://archive.org/download/com.dozengames.floorsescape-ios4.3-clutch-2.0.4_202412/com.dozengames.FloorsEscape-iOS4.3-%28Clutch-2.0.4%29.ipa"
             },
             {
@@ -24,8 +24,8 @@
                     unarchived: []
                 },
                 compatibility: "iPhoneOS 3.1.3 and Later",
-                icon: "app-icon/jelly-car-3/JellyCar3Lite.png",
-                screenshot: ""
+                icon: "app-icon/jelly-car-3/jelly-car-3.png",
+                screenshot: "UNDERCONSTRUCTION.jpg"
             },
             {
                 id: "disney-gift-card",
@@ -37,8 +37,8 @@
                     unarchived: []
                 },
                 compatibility: "iPhoneOS 3.1.2 and Later",
-                icon: "app-icon/disney-gift-card/DisneyGift.png",
-                screenshot: "IMG_6234.jpeg"
+                icon: "app-icon/disney-gift-card/disney-gift-card.png",
+                screenshot: "UNDERCONSTRUCTION.jpg"
             },
             {
                 id: "jelly-car-2",
@@ -50,8 +50,8 @@
                     unarchived: []
                 },
                 compatibility: "iPhoneOS 4.0 and Later",
-                icon: "app-icon/jelly-car-2/IMG_4924.jpeg", 
-                screenshot: ""
+                icon: "app-icon/jelly-car-2/jelly-car-2.png", 
+                screenshot: "UNDERCONSTRUCTION.jpg"
             },
             {
                 id: "flappy-bird",
@@ -63,8 +63,8 @@
                     unarchived: []
                 },
                 compatibility: "iOS 6.0 and Later",
-                icon: "app-icon/flappy-bird/Flappy.png",
-                screenshot: ""
+                icon: "app-icon/flappy-bird/flappy-bird.png",
+                screenshot: "UNDERCONSTRUCTION.jpg"
             }
         ];
 
