@@ -10,7 +10,7 @@
                     unarchived: ["1.0.0", "1.1.0", "1.2.0", "1.3.0", "1.3.1", "1.3.2"]
                 },
                 compatibility: "iPhoneOS 4.3 and Later",
-                icon: "https://archive.org/download/com.dozengames.floorsescape-ios4.3-clutch-2.0.4_202412/th-3234825290_thumb.jpg",
+                icon: "app-icon/escape-if-you-can/th-3234825290_thumb.jpg",
                 screenshot: "IMG_6233.jpeg",
                 downloadUrl: "https://archive.org/download/com.dozengames.floorsescape-ios4.3-clutch-2.0.4_202412/com.dozengames.FloorsEscape-iOS4.3-%28Clutch-2.0.4%29.ipa"
             },
@@ -24,7 +24,7 @@
                     unarchived: []
                 },
                 compatibility: "iPhoneOS 3.1.3 and Later",
-                icon: "https://archive.org/download/com.disney.jellycar3lite-ios3.1.3-clutch-2.0.4/JellyCar3Lite.png",
+                icon: "app-icon/jelly-car-3/JellyCar3Lite.png",
                 screenshot: ""
             },
             {
@@ -37,7 +37,7 @@
                     unarchived: []
                 },
                 compatibility: "iPhoneOS 3.1.2 and Later",
-                icon: "https://archive.org/download/com.disney.disneygiftcard-ios3.1.2-clutch-2.0.4/DisneyGift.png",
+                icon: "app-icon/disney-gift-card/DisneyGift.png",
                 screenshot: "IMG_6234.jpeg"
             },
             {
@@ -50,7 +50,7 @@
                     unarchived: []
                 },
                 compatibility: "iPhoneOS 4.0 and Later",
-                icon: "https://archive.org/download/jelly-car-2-1.2.2/IMG_4924.jpeg",
+                icon: "app-icon/jelly-car-2/IMG_4924.jpeg", 
                 screenshot: ""
             },
             {
@@ -63,7 +63,7 @@
                     unarchived: []
                 },
                 compatibility: "iOS 6.0 and Later",
-                icon: "https://archive.org/download/flappy-bird-v-1.3_202412/Flappy.png",
+                icon: "app-icon/flappy-bird/Flappy.png",
                 screenshot: ""
             }
         ];
