@@ -215,9 +215,25 @@
             // Search functionality
             const searchInput = document.getElementById('searchInput');
             const searchCancel = document.getElementById('searchCancel');
-            
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const initialQuery = urlParams.get('query');
+            if (initialQuery) {
+                searchInput.value = initialQuery;
+                const event = new Event('input', { bubbles: true });
+                searchInput.dispatchEvent(event);
+            }
+
             searchInput.addEventListener('input', function() {
                 const searchTerm = this.value.toLowerCase();
+                const params = new URLSearchParams(window.location.search);
+                if (searchTerm.length > 0) {
+                    params.set('query', searchTerm);
+                } else {
+                    params.delete('query');
+                }
+                const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+                window.history.replaceState({}, '', newUrl);
                 const appCards = document.querySelectorAll('.app-card');
                 let anyVisible = false;
                 
