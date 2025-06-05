@@ -22,7 +22,7 @@ jobs:
 
       - name: Extract IA apps and format metadata
         env:
-          IA_ACCOUNT: your_ia_account_name
+          IA_ACCOUNT: legacyios_archive
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: node .github/scripts/extract-ia-apps.js
 
