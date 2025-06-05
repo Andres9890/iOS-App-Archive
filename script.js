@@ -1,5 +1,76 @@
        // All your apps with complete information
-        const apps = [];
+        const apps = [
+            {
+                id: "escape-if-you-can",
+                title: "Escape If You Can",
+                developer: "mobigrow",
+                description: "Can You Escape - Deluxe - Out Now!\nAdvance to the next floor by solving the puzzles!\nYou can pick certain items up and use them from your inventory.\nKeep the Escape If You Can app, so we can notify you of new levels.\n9 floors available at the moment!\nSmartphone puzzles! Addicting mini puzzles!\nGorgeous graphics and different themed floors!\nConstant updates of New Floors!\nit's FREE!",
+                versions: {
+                    archived: ["1.3.3"],
+                    unarchived: ["1.0.0", "1.1.0", "1.2.0", "1.3.0", "1.3.1", "1.3.2"]
+                },
+                compatibility: "iPhoneOS 4.3 and Later",
+                icon: "app-icon/escape-if-you-can/escape-if-you-can.jpg",
+                screenshot: "UNDERCONSTRUCTION.jpg",
+                downloadUrl: "https://archive.org/download/com.dozengames.floorsescape-ios4.3-clutch-2.0.4_202412/"
+            },
+            {
+                id: "jelly-car-3-lite",
+                title: "JellyCar 3 Lite",
+                developer: "Disney",
+                description: "The wobbly, bouncy, jelly-licious driving game is back!\nDrive through squishy worlds with new vehicles and obstacles.\nUnique jelly physics make every drive different.\nColorful, imaginative levels to explore.\nSimple controls with challenging gameplay.\nPerfect for quick gaming sessions.",
+                versions: {
+                    archived: ["1.0", "1.0.1"],
+                    unarchived: []
+                },
+                compatibility: "iPhoneOS 3.1.3 and Later",
+                icon: "app-icon/jelly-car-3-lite/jelly-car-3-lite.png",
+                screenshot: "UNDERCONSTRUCTION.jpg",
+                downloadUrl: "https://archive.org/download/com.disney.jellycar3lite-ios3.1.3-clutch-2.0.4/"
+            },
+            {
+                id: "disney-gift-card",
+                title: "Disney Gift Card",
+                developer: "Disney",
+                description: "Check your Disney Gift Card balance anytime.\nSecure and easy to use.\nManage multiple gift cards in one place.\nView transaction history.\nRedeem new gift cards with your camera.\nOfficial Disney app with trusted security.",
+                versions: {
+                    archived: ["1.0"],
+                    unarchived: []
+                },
+                compatibility: "iPhoneOS 3.1.2 and Later",
+                icon: "app-icon/disney-gift-card/disney-gift-card.png",
+                screenshot: "UNDERCONSTRUCTION.jpg",
+                downloadUrl: "https://archive.org/download/com.disney.disneygiftcard-ios3.1.2-clutch-2.0.4/"
+            },
+            {
+                id: "jelly-car-2",
+                title: "Jelly Car 2",
+                developer: "Disney",
+                description: "The sequel to the original jelly physics driving game!\nNew vehicles with unique jelly properties.\nMore challenging levels and obstacles.\nColorful, squishy environments to explore.\nSimple one-touch controls.\nFun for all ages with surprising depth.",
+                versions: {
+                    archived: ["1.0", "1.0.1", "1.1", "1.2", "1.2.1", "1.2.2"],
+                    unarchived: [],
+                },
+                compatibility: "iPhoneOS 4.0 and Later",
+                icon: "app-icon/jelly-car-2/jelly-car-2.jpeg", 
+                screenshot: "UNDERCONSTRUCTION.jpg",
+                downloadUrl: "https://archive.org/download/jelly-car-2-1.2.2"
+            },
+            {
+                id: "flappy-bird",
+                title: "Flappy Bird",
+                developer: "dotGears",
+                description: "The infamous challenging flying game!\nTap to keep the bird flying through pipes.\nSimple controls, extremely difficult to master.\nCompete with friends for high scores.\nMinimalist pixel art style.\nAddictive one-more-try gameplay.",
+                versions: {
+                    archived: ["1.0", "1.1", "1.2", "1.3"],
+                    unarchived: []
+                },
+                compatibility: "iOS 6.0 and Later",
+                icon: "app-icon/flappy-bird/flappy-bird.png",
+                screenshot: "UNDERCONSTRUCTION.jpg",
+                downloadUrl: "https://archive.org/download/flappy-bird-v-1.3_202412"
+            }
+        ];
 
         // Function to load all apps
         function loadApps() {
