@@ -113,7 +113,7 @@ async function main() {
   }
 
   // Read the old script.js, replace the apps array
-  const scriptPath = '../script.js';
+  const scriptPath = 'script.js';
   let scriptContent = fs.readFileSync(scriptPath, 'utf8');
   scriptContent = scriptContent.replace(
     /const apps = \[[\s\S]*?\];/,
