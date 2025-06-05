@@ -1,12 +1,8 @@
 const fetch = require('node-fetch');
 const fs = require('fs');
 const path = require('path');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 const IA_ACCOUNT = process.env.IA_ACCOUNT;
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-
-const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 
 async function getAllItems(account) {
   const url = `https://archive.org/advancedsearch.php?q=collection%3A${account}&fl[]=identifier&rows=1000&output=json`;
@@ -35,34 +31,6 @@ async function downloadImage(url, dest) {
   }
 }
 
-async function geminiExtractMetadata({ description, creator, downloadUrl }) {
-  const prompt = `
-Given the following app information, extract and return a JSON object with the following fields, and insert them into the script.js with the info:
-- title: (string)
-- developer: (string)
-- description: (string, cleaned up)
-- compatibility: (string, e.g. "iOS 6.0 and Later" or similar, if available)
-- versions: { archived: [string], unarchived: [string] }
-If any field is missing, do your best to infer or leave as an empty string/array.
-
-App Description: """${description}"""
-Creator: """${creator}"""
-Download URL: """${downloadUrl}"""
-`;
-
-  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-  const result = await model.generateContent(prompt);
-  const text = result.response.candidates[0].content.parts[0].text;
-  try {
-    return JSON.parse(text);
-  } catch {
-    // Try to extract JSON from text
-    const match = text.match(/\{[\s\S]*\}/);
-    if (match) return JSON.parse(match[0]);
-    return null;
-  }
-}
-
 async function main() {
   const items = await getAllItems(IA_ACCOUNT);
   const apps = [];
@@ -71,12 +39,8 @@ async function main() {
     if (!meta || !meta.metadata) continue;
 
     const description = meta.metadata.description || "";
-    const creator = meta.metadata.creator || "";
+    const creator = meta.metadata.creator || "Unknown";
     const downloadUrl = `https://archive.org/download/${id}/`;
-
-    // Use Gemini to extract/clean metadata
-    const aiMeta = await geminiExtractMetadata({ description, creator, downloadUrl });
-    if (!aiMeta) continue;
 
     // Download icon and screenshot if available
     let iconPath = `app-icon/${id}/icon.png`;
@@ -101,24 +65,32 @@ async function main() {
     // Compose app object
     apps.push({
       id,
-      title: aiMeta.title || id,
-      developer: aiMeta.developer || creator || "Unknown",
-      description: aiMeta.description || description,
-      versions: aiMeta.versions || { archived: [], unarchived: [] },
-      compatibility: aiMeta.compatibility || "Unknown",
+      title: meta.metadata.title || id,
+      developer: creator,
+      description: description,
+      versions: { archived: [], unarchived: [] },
+      compatibility: meta.metadata.os || "Unknown",
       icon: iconPath,
       screenshot: screenshotPath,
       downloadUrl
     });
   }
 
-  // Read the old script.js, replace the apps array
-  const scriptPath = 'script.js';
-  let scriptContent = fs.readFileSync(scriptPath, 'utf8');
-  scriptContent = scriptContent.replace(
-    /const apps = \[[\s\S]*?\];/,
-    `const apps = ${JSON.stringify(apps, null, 4)};`
-  );
+  // Write or update script.js
+  const scriptPath = 'iOS-App-Archive/script.js';
+  let scriptContent;
+  if (fs.existsSync(scriptPath)) {
+    scriptContent = fs.readFileSync(scriptPath, 'utf8');
+    scriptContent = scriptContent.replace(
+      /const apps = \[[\s\S]*?\];/,
+      `const apps = ${JSON.stringify(apps, null, 4)};`
+    );
+  } else {
+    scriptContent = `// All your apps with complete information
+const apps = ${JSON.stringify(apps, null, 4)};
+`;
+  }
+  fs.mkdirSync(path.dirname(scriptPath), { recursive: true });
   fs.writeFileSync(scriptPath, scriptContent);
   console.log('Updated script.js with new app metadata.');
 }
