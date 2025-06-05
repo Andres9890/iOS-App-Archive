@@ -37,7 +37,7 @@ async function downloadImage(url, dest) {
 
 async function geminiExtractMetadata({ description, creator, downloadUrl }) {
   const prompt = `
-Given the following app information, extract and return a JSON object with the following fields:
+Given the following app information, extract and return a JSON object with the following fields, and insert them into the script.js with the info:
 - title: (string)
 - developer: (string)
 - description: (string, cleaned up)
