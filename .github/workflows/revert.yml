@@ -1,0 +1,30 @@
+name: Revert Last Commit
+
+on:
+  workflow_dispatch:
+
+jobs:
+  revert-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@ting.noreply.github.com"
+
+      - name: Revert last commit
+        run: |
+          LAST_COMMIT_SHA=$(git rev-parse HEAD)
+          git revert --no-edit "$LAST_COMMIT_SHA"
+
+      - name: Push revert commit
+        run: |
+          git push origin HEAD:${GITHUB_REF#refs/heads/}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
