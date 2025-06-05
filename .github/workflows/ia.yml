@@ -18,12 +18,11 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install node-fetch@2 @google/generative-ai@latest
+        run: npm install node-fetch@2
 
       - name: Extract IA apps and format metadata
         env:
           IA_ACCOUNT: legacyios_archive
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: node .github/scripts/extract-ia-apps.js
 
       - name: Commit and push changes
