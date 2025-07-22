@@ -1303,26 +1303,25 @@
         let touchStartX = 0;
         let touchEndX = 0;
 
+        // Simple 32-bit FNV-1a hash for deterministic randomness
+        function hashString(str) {
+            let hash = 2166136261;
+            for (let i = 0; i < str.length; i++) {
+                hash ^= str.charCodeAt(i);
+                hash = Math.imul(hash, 16777619);
+            }
+            return hash >>> 0;
+        }
+
         // Get a deterministic set of random apps for the current day
         function getDailyRandomApps(appList, count) {
             const dateStr = new Date().toISOString().slice(0, 10);
-            let seed = 0;
-            for (let i = 0; i < dateStr.length; i++) {
-                seed = (seed << 5) - seed + dateStr.charCodeAt(i);
-                seed |= 0;
-            }
-            function rand() {
-                seed |= 0; seed = seed + 0x6D2B79F5 | 0;
-                let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
-                t ^= t + Math.imul(t ^ t >>> 7, 61 | t);
-                return ((t ^ t >>> 14) >>> 0) / 4294967296;
-            }
-            const list = [...appList];
-            for (let i = list.length - 1; i > 0; i--) {
-                const j = Math.floor(rand() * (i + 1));
-                [list[i], list[j]] = [list[j], list[i]];
-            }
-            return list.slice(0, count);
+            const scored = appList.map(app => ({
+                app,
+                score: hashString(dateStr + '|' + app.id)
+            }));
+            scored.sort((a, b) => a.score - b.score || a.app.id.localeCompare(b.app.id));
+            return scored.slice(0, count).map(item => item.app);
         }
         
         // Initialize carousel
