@@ -2667,9 +2667,29 @@
         }
 
         // Create a modal for a single app when needed
+        function getArchiveIdentifier(app) {
+            if (!app || !app.versions || !Array.isArray(app.versions.archived)) {
+                return null;
+            }
+
+            for (const version of app.versions.archived) {
+                if (!version || typeof version.url !== 'string') {
+                    continue;
+                }
+
+                const match = version.url.match(/https?:\/\/archive\.org\/download\/([^/]+)\//i);
+                if (match && match[1]) {
+                    return match[1];
+                }
+            }
+
+            return null;
+        }
+
         function createModal(app) {
             // Create version list items
             let versionItems = '';
+            let torrentButtonHtml = '';
                 
                 // Add archived versions if they exist
                 if (app.versions.archived.length > 0) {
@@ -2707,10 +2727,22 @@
                     `<button class="category-tag category-select-btn" data-category="${cat}">${cat}</button>`
                 ).join('');
                 
+                const archiveIdentifier = getArchiveIdentifier(app);
+                if (archiveIdentifier) {
+                    const torrentUrl = `https://archive.org/download/${archiveIdentifier}/${archiveIdentifier}_archive.torrent`;
+                    torrentButtonHtml = `
+                        <div class="torrent-button-container">
+                            <a href="${torrentUrl}" download class="download-button torrent-button">
+                                <i class="fas fa-magnet"></i> Download Torrent
+                            </a>
+                        </div>
+                    `;
+                }
+
                 const modal = document.createElement('div');
                 modal.className = 'modal-overlay';
                 modal.id = `${app.id}Modal`;
-                
+
                 modal.innerHTML = `
                     <div class="modal-content">
                         <button class="close-modal">&times;</button>
@@ -2745,10 +2777,11 @@
                                     ${versionItems}
                                 </div>
                             </div>
+                            ${torrentButtonHtml}
                         </div>
                     </div>
                 `;
-                
+
             modalContainer.appendChild(modal);
 
             modal.querySelector('.close-modal').addEventListener('click', function() {
