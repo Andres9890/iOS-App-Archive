@@ -2390,7 +2390,12 @@
                                 categories: ["Action", "Casual", "Games"]
                             }                                                                                                                                                                                                                                  
                          ];
-        const globalTarget = typeof window !== 'undefined' ? window : (typeof globalThis !== 'undefined' ? globalThis : undefined);
-        if (globalTarget) {
-            globalTarget.apps = apps;
+
+        // Export apps data to global scope for script.js to access
+        if (typeof window !== 'undefined') {
+            window.apps = apps;
+        } else if (typeof globalThis !== 'undefined') {
+            globalThis.apps = apps;
+        } else if (typeof global !== 'undefined') {
+            global.apps = apps;
         }
