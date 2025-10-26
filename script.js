@@ -2906,14 +2906,15 @@
             searchResults.innerHTML = '';
             const totalApps = sortedApps.length;
             const totalPages = Math.max(1, Math.ceil(totalApps / APPS_PER_PAGE));
-            
-            if (page === 1) {
-                setUrlParam('page', '');
-                page = 1;
-            }
-            
+
             if (page < 1) page = 1;
             if (page > totalPages) page = totalPages;
+
+            if (page > 1) {
+                setUrlParam('page', page);
+            } else {
+                setUrlParam('page', '');
+            }
             
             const startIdx = (page - 1) * APPS_PER_PAGE;
             const endIdx = startIdx + APPS_PER_PAGE;
