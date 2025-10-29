@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>script.js unit tests</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 16px; }
+#results { margin-top: 16px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; }
+.test.pass { color: #0a7d00; }
+.test.fail { color: #b00020; }
+.summary { font-weight: bold; margin-top: 16px; }
+.tabs { display: flex; gap: 8px; margin: 8px 0; }
+.tab { padding: 6px 10px; border: 1px solid #ddd; border-radius: 4px; background: #f6f6f6; cursor: pointer; }
+.tab.active { background: #e9f2ff; border-color: #82b1ff; }
+.section { display: none; }
+.section.active { display: block; }
+.carousel-container { display: none; }
+.search-results.active { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 12px; }
+.app-card-grid { border: 1px solid #eee; padding: 8px; border-radius: 6px; }
+.pagination-controls { margin-top: 12px; text-align:center; }
+.pagination-page.current { font-weight: bold; }
+.category-tag { padding: 6px 10px; background:#f1f1f1; border:1px solid #ddd; border-radius:4px; }
+.modal-overlay { display:none; position:fixed; inset:0; background: rgba(0,0,0,0.5); }
+.modal-overlay.active { display:flex; align-items:center; justify-content:center; }
+.modal-content { background:#fff; padding:16px; max-height:80vh; overflow:auto; width:min(900px, 92vw); border-radius:8px; }
+</style>
+</head>
+<body>
+<h1>Unit tests for script.js (diff vs base "icons")</h1>
+
+<!-- Minimal UI/DOM that script.js expects -->
+<div class="tabs">
+  <button class="tab active" data-tab="featured">Featured</button>
+  <button class="tab" data-tab="search">Search</button>
+  <button class="tab" data-tab="categories">Categories</button>
+  <button class="tab" data-tab="genius">Genius</button>
+  <button class="tab" data-tab="updates">Updates</button>
+</div>
+
+<div id="carouselContainer" class="carousel-container">
+  <div id="carousel"></div>
+  <div id="carouselNav"></div>
+</div>
+
+<div id="searchContainer" style="display:none">
+  <input id="searchInput" placeholder="Search apps..."/>
+  <button id="cancelSearch" style="display:none">Cancel</button>
+</div>
+
+<div id="modalContainer"></div>
+
+<div id="featuredContent" class="section"></div>
+<div id="categoriesContent" class="section"></div>
+<div id="geniusContent" class="section"></div>
+<div id="searchContent" class="section"></div>
+<div id="updatesContent" class="section"></div>
+
+<div id="searchResults" class="search-results"></div>
+
+<div id="results"></div>
+
+<!-- Load the app script under test -->
+<script src="../script.js"></script>
+<!-- Harness and specs -->
+<script src="./harness.js"></script>
+<script src="./script.spec.js"></script>
+</body>
+</html>
