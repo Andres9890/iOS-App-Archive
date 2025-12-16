@@ -27,6 +27,9 @@
         const cancelSearch = document.getElementById('cancelSearch');
         const tabs = document.querySelectorAll('.tab');
         const modalContainer = document.getElementById('modalContainer');
+
+        const TAB_NAMES = ['featured', 'categories', 'genius', 'search', 'updates'];
+        const TAB_NAME_SET = new Set(TAB_NAMES);
         
         // Tab content areas
         const tabContents = {
@@ -464,10 +467,47 @@
             setUrlParam('app', appId);
         }
         
+        function getBasePath(pathname = window.location.pathname) {
+            const hadTrailingSlash = pathname.endsWith('/');
+            const segments = pathname.split('/').filter(Boolean);
+            const lastSegment = segments[segments.length - 1];
+            const lastIsTab = lastSegment && TAB_NAME_SET.has(lastSegment.toLowerCase());
+            if (lastIsTab) {
+                segments.pop();
+            }
+            if (segments.length === 0) return '/';
+            const base = '/' + segments.join('/');
+            const shouldHaveTrailingSlash = hadTrailingSlash || lastIsTab;
+            return shouldHaveTrailingSlash ? `${base}/` : base;
+        }
+
+        function updateTabInUrl(tabName) {
+            const normalizedTab = (tabName || '').toLowerCase();
+            const basePath = getBasePath();
+            const trimmedBase = basePath.endsWith('/') && basePath !== '/' ? basePath.slice(0, -1) : basePath;
+            const targetPath = normalizedTab === 'featured' ? basePath : `${trimmedBase === '/' ? '' : trimmedBase}/${normalizedTab}`;
+            const newUrl = targetPath + (window.location.search ? window.location.search : '');
+            const currentUrl = window.location.pathname + window.location.search;
+            if (newUrl !== currentUrl) {
+                window.history.replaceState({}, '', newUrl);
+            }
+        }
+
+        function getTabFromPath(pathname = window.location.pathname) {
+            const segments = pathname.split('/').filter(Boolean);
+            if (segments.length === 0) return 'featured';
+            const lastSegment = segments[segments.length - 1].toLowerCase();
+            if (TAB_NAME_SET.has(lastSegment)) {
+                return lastSegment;
+            }
+            return 'featured';
+        }
+
         // Tab switching
         tabs.forEach(tab => {
             tab.addEventListener('click', function() {
                 const tabName = this.getAttribute('data-tab');
+                updateTabInUrl(tabName);
                 // Update active tab
                 tabs.forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
@@ -624,6 +664,14 @@
             }
 
             initCarousel();
+
+            const pathTab = getTabFromPath();
+            if (pathTab && pathTab !== 'featured') {
+                const matchingTab = document.querySelector(`.tab[data-tab="${pathTab}"]`);
+                if (matchingTab) {
+                    matchingTab.click();
+                }
+            }
 
             // Add keyboard navigation
             document.addEventListener('keydown', function(e) {
