@@ -1,0 +1,42 @@
+name: Generate MD5 Checksums
+
+on:
+  push:
+    paths-ignore:
+      - 'cdn/md5.txt'
+
+jobs:
+  build-checksums:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v5
+
+      - name: Calculate MD5s
+        run: |
+          mkdir -p cdn
+
+          
+          find . -type f -not -path '*/.git/*' -not -path './cdn/md5.txt' -exec md5sum {} + | \
+          sed 's/^\([a-f0-9]\{32\}\)  \.\/\(.*\)/\2:\1/' | \
+          sort > cdn/md5.txt
+
+          cat cdn/md5.txt
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add cdn/md5.txt
+          
+          if git diff --staged --quiet; then
+            echo "No changes in MD5"
+          else
+            git commit -m "Update MD5"
+            git push
+          fi
